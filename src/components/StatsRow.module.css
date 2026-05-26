@@ -1,0 +1,49 @@
+.row {
+  display:          grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap:              1px;
+  border:           0.5px solid var(--border);
+  border-radius:    12px;
+  overflow:         hidden;
+  background:       var(--border);
+}
+
+.stat {
+  background:       var(--bg-card);
+  padding:          1.25rem 1.5rem;
+  display:          flex;
+  flex-direction:   column;
+  gap:              4px;
+  opacity:          0;
+  animation:        fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition:       background 0.2s;
+}
+
+.stat:hover { background: var(--bg-card-hover); }
+
+.label {
+  font-family:    var(--font-mono);
+  font-size:      10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color:          var(--text-muted);
+}
+
+.value {
+  font-family:    var(--font-display);
+  font-size:      1.75rem;
+  font-style:     italic;
+  color:          var(--text-primary);
+  line-height:    1;
+  letter-spacing: -0.02em;
+}
+
+.sub {
+  font-family: var(--font-mono);
+  font-size:   11px;
+  color:       var(--text-secondary);
+}
+
+@media (max-width: 600px) {
+  .row { grid-template-columns: repeat(2, 1fr); }
+}

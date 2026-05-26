@@ -1,0 +1,72 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:            #0a0a0a;
+  --bg-card:       #111111;
+  --bg-card-hover: #161616;
+  --border:        rgba(255,255,255,0.07);
+  --border-strong: rgba(255,255,255,0.14);
+  --text-primary:  #f0ece4;
+  --text-secondary:#7a7770;
+  --text-muted:    #3d3c3a;
+  --accent-year:   #e8c4a0;
+  --accent-month:  #a8c4b8;
+  --accent-week:   #b4a8d0;
+  --accent-day:    #c4b8a0;
+  --progress-bg:   rgba(255,255,255,0.05);
+  --font-display:  "DM Serif Display", Georgia, serif;
+  --font-mono:     "DM Mono", "Courier New", monospace;
+}
+
+html {
+  background:              var(--bg);
+  color:                   var(--text-primary);
+  font-family:             var(--font-mono);
+  -webkit-font-smoothing:  antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height:  100vh;
+  background:  var(--bg);
+  overflow-x:  hidden;
+}
+
+/* Real grain — feTurbulence alone gives blur, needs feColorMatrix + feBlend */
+body::before {
+  content:          "";
+  position:         fixed;
+  inset:            0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.06'/%3E%3C/svg%3E");
+  pointer-events:   none;
+  z-index:          0;
+}
+
+::-webkit-scrollbar        { width: 5px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: var(--text-muted); border-radius: 3px; }
+
+/* Shared entrance animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Blinking colon */
+@keyframes blink {
+  0%, 49%  { opacity: 1; }
+  50%, 100% { opacity: 0.12; }
+}
+
+/* Respect reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration:   0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration:  0.01ms !important;
+  }
+}

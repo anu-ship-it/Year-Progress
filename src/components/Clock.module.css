@@ -1,0 +1,55 @@
+.wrapper {
+  text-align: center;
+  animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.time {
+  font-family:    var(--font-display);
+  font-style:     italic;
+  font-size:      clamp(3.5rem, 8vw, 6rem);
+  letter-spacing: -0.03em;
+  color:          var(--text-primary);
+  line-height:    1;
+  margin-bottom:  0.5rem;
+  display:        flex;
+  align-items:    baseline;
+  justify-content: center;
+  gap:            0.02em;
+}
+
+.hhmm {
+  /* stable width so colon blink doesn't cause layout shift */
+  display:    inline-block;
+  min-width:  0.9ch;
+  text-align: center;
+}
+
+.colon {
+  animation: blink 1s step-end infinite;
+  color:      var(--text-muted);
+}
+
+.seconds {
+  color:     var(--text-secondary);
+  font-size: 0.6em;
+}
+
+.date {
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  gap:             0.5rem;
+  font-family:     var(--font-mono);
+  font-size:       13px;
+  color:           var(--text-secondary);
+  letter-spacing:  0.04em;
+  flex-wrap:       wrap;
+}
+
+.tz {
+  color:         var(--text-muted);
+  font-size:     11px;
+  padding:       2px 8px;
+  border:        0.5px solid var(--border-strong);
+  border-radius: 4px;
+}

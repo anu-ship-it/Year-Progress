@@ -1,0 +1,126 @@
+.card {
+  background:    var(--bg-card);
+  border:        0.5px solid var(--border);
+  border-radius: 12px;
+  padding:       1.5rem;
+  opacity:       0;
+  animation:     fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition:    border-color 0.3s ease, background 0.3s ease;
+}
+
+.card:hover {
+  border-color: var(--border-strong);
+  background:   var(--bg-card-hover);
+}
+
+.header {
+  display:         flex;
+  align-items:     baseline;
+  justify-content: space-between;
+  margin-bottom:   1rem;
+}
+
+.label {
+  font-family:    var(--font-mono);
+  font-size:      11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color:          var(--text-secondary);
+}
+
+.percent {
+  font-family:    var(--font-display);
+  font-size:      2rem;
+  font-style:     italic;
+  color:          var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height:    1;
+}
+
+.pctSign {
+  font-size:   1.2rem;
+  margin-left: 1px;
+  opacity:     0.6;
+}
+
+/* Track */
+.track {
+  position:      relative;
+  height:        2px;
+  background:    var(--progress-bg);
+  border-radius: 2px;
+  margin-bottom: 0.875rem;
+  overflow:      visible;
+}
+
+.fill {
+  position:      absolute;
+  top:           0;
+  left:          0;
+  height:        100%;
+  width:         0%;
+  background:    var(--accent-color);
+  border-radius: 2px;
+}
+
+.nub {
+  position:      absolute;
+  top:           50%;
+  left:          0%;
+  width:         8px;
+  height:        8px;
+  border-radius: 50%;
+  background:    var(--accent-color);
+  transform:     translate(-50%, -50%);
+  box-shadow:    0 0 10px var(--accent-color);
+}
+
+/* Stats row */
+.stats {
+  display:     flex;
+  align-items: center;
+  gap:         0.5rem;
+  flex-wrap:   wrap;
+}
+
+.stat {
+  font-size:  12px;
+  color:      var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+.divider {
+  color:     var(--text-muted);
+  font-size: 12px;
+}
+
+.remainPct {
+  margin-left:  auto;
+  font-size:    11px;
+  font-family:  var(--font-mono);
+  color:        var(--text-muted);
+}
+
+/* Milestone */
+.milestone {
+  margin-top:   0.875rem;
+  padding-top:  0.875rem;
+  border-top:   0.5px solid var(--border);
+  display:      flex;
+  align-items:  center;
+  justify-content: space-between;
+}
+
+.milestoneLabel {
+  font-size:      10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color:          var(--text-muted);
+  font-family:    var(--font-mono);
+}
+
+.milestoneValue {
+  font-size:   12px;
+  color:       var(--accent-color);
+  font-family: var(--font-mono);
+}

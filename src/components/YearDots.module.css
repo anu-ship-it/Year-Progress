@@ -1,0 +1,69 @@
+.wrapper {
+  background:    var(--bg-card);
+  border:        0.5px solid var(--border);
+  border-radius: 12px;
+  padding:       1.5rem;
+  opacity:       0;
+  animation:     fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+  transition:    border-color 0.3s ease;
+}
+
+.wrapper:hover { border-color: var(--border-strong); }
+
+.header {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  margin-bottom:   1.25rem;
+}
+
+.title {
+  font-family:    var(--font-mono);
+  font-size:      11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color:          var(--text-secondary);
+}
+
+.sub {
+  font-family: var(--font-mono);
+  font-size:   11px;
+  color:       var(--text-muted);
+}
+
+.grid {
+  display:   flex;
+  flex-wrap: wrap;
+  gap:       3px;
+}
+
+/* Base dot style — all three states share size + shape */
+.grid > div {
+  width:         6px;
+  height:        6px;
+  border-radius: 50%;
+  transition:    transform 0.15s ease, opacity 0.15s ease;
+  cursor:        default;
+}
+
+.grid > div:hover {
+  opacity:   1 !important;
+  transform: scale(1.6) !important;
+}
+
+.past {
+  background: var(--accent-year);
+  opacity:    0.55;
+}
+
+.today {
+  background: var(--accent-year);
+  opacity:    1;
+  box-shadow: 0 0 7px var(--accent-year);
+  transform:  scale(1.4);
+}
+
+.future {
+  background: var(--text-muted);
+  opacity:    0.2;
+}

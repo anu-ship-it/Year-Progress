@@ -3,8 +3,6 @@
   border:        0.5px solid var(--border);
   border-radius: 12px;
   padding:       1.5rem;
-  opacity:       0;
-  animation:     fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
   transition:    border-color 0.3s ease;
 }
 
@@ -37,7 +35,6 @@
   gap:       3px;
 }
 
-/* Base dot style — all three states share size + shape */
 .grid > div {
   width:         6px;
   height:        6px;
@@ -51,19 +48,6 @@
   transform: scale(1.6) !important;
 }
 
-.past {
-  background: var(--accent-year);
-  opacity:    0.55;
-}
-
-.today {
-  background: var(--accent-year);
-  opacity:    1;
-  box-shadow: 0 0 7px var(--accent-year);
-  transform:  scale(1.4);
-}
-
-.future {
-  background: var(--text-muted);
-  opacity:    0.2;
-}
+.past   { background: var(--accent-year); opacity: 0.55; }
+.today  { background: var(--accent-year); opacity: 1; box-shadow: 0 0 7px var(--accent-year); transform: scale(1.4); }
+.future { background: var(--text-muted);  opacity: 0.2; }

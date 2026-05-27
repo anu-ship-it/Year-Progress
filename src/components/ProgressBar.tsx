@@ -5,67 +5,70 @@ import type { ProgressData } from "@/lib/time";
 import styles from "./ProgressBar.module.css";
 
 interface Props {
-  data: ProgressData;
+  data:  ProgressData;
   index: number;
 }
 
 export function ProgressBar({ data, index }: Props) {
-  const fillRef = useRef<HTMLDivElement>(null);
-  const nubRef  = useRef<HTMLDivElement>(null);
-  const mounted = useRef(false);
+  const fillRef  = useRef<HTMLDivElement>(null);
+  const nubRef   = useRef<HTMLDivElement>(null);
+  const mounted  = useRef(false);
 
-  // Mount animation — runs once
+  // Initial fill animation — runs once after mount
   useEffect(() => {
     const fill = fillRef.current;
     const nub  = nubRef.current;
     if (!fill || !nub) return;
 
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const delay = `${index * 120}ms`;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const delay   = index * 120; // ms stagger
 
-    if (prefersReduced) {
+    if (reduced) {
       fill.style.width = `${data.percent}%`;
       nub.style.left   = `${Math.min(data.percent, 99.4)}%`;
       mounted.current  = true;
       return;
     }
 
+    // Start at 0 with no transition
     fill.style.transition = "none";
     nub.style.transition  = "none";
-    fill.style.width = "0%";
-    nub.style.left   = "0%";
+    fill.style.width      = "0%";
+    nub.style.left        = "0%";
 
-    // Double rAF guarantees the browser has painted the 0% state
+    // Paint the 0% frame, then animate to real value
     const id = requestAnimationFrame(() =>
       requestAnimationFrame(() => {
-        fill.style.transition = `width 1.5s cubic-bezier(0.16, 1, 0.3, 1) ${delay}`;
-        nub.style.transition  = `left  1.5s cubic-bezier(0.16, 1, 0.3, 1) ${delay}`;
-        fill.style.width = `${data.percent}%`;
-        nub.style.left   = `${Math.min(data.percent, 99.4)}%`;
-
-        setTimeout(() => { mounted.current = true; }, 1500 + index * 120 + 50);
+        fill.style.transition = `width 1.5s cubic-bezier(0.16,1,0.3,1) ${delay}ms`;
+        nub.style.transition  = `left  1.5s cubic-bezier(0.16,1,0.3,1) ${delay}ms`;
+        fill.style.width      = `${data.percent}%`;
+        nub.style.left        = `${Math.min(data.percent, 99.4)}%`;
       })
     );
 
-    return () => cancelAnimationFrame(id);
+    const timer = setTimeout(() => { mounted.current = true; }, 1500 + delay + 50);
+
+    return () => {
+      cancelAnimationFrame(id);
+      clearTimeout(timer);
+    };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Live updates after mount
+  // Live tick updates after mount animation finishes
   useEffect(() => {
     if (!mounted.current) return;
     const fill = fillRef.current;
     const nub  = nubRef.current;
     if (!fill || !nub) return;
-
-    fill.style.transition = "width 0.95s cubic-bezier(0.16, 1, 0.3, 1)";
-    nub.style.transition  = "left  0.95s cubic-bezier(0.16, 1, 0.3, 1)";
-    fill.style.width = `${data.percent}%`;
-    nub.style.left   = `${Math.min(data.percent, 99.4)}%`;
+    fill.style.transition = "width 0.95s cubic-bezier(0.16,1,0.3,1)";
+    nub.style.transition  = "left  0.95s cubic-bezier(0.16,1,0.3,1)";
+    fill.style.width      = `${data.percent}%`;
+    nub.style.left        = `${Math.min(data.percent, 99.4)}%`;
   }, [data.percent]);
 
-  const pct        = data.percent.toFixed(4);
-  const remainPct  = (100 - data.percent).toFixed(4);
+  const pct       = data.percent.toFixed(4);
+  const remainPct = (100 - data.percent).toFixed(4);
 
   return (
     <div
@@ -74,7 +77,9 @@ export function ProgressBar({ data, index }: Props) {
     >
       <div className={styles.header}>
         <span className={styles.label}>{data.label}</span>
-        <span className={styles.percent}>{pct}<span className={styles.pctSign}>%</span></span>
+        <span className={styles.percent}>
+          {pct}<span className={styles.pctSign}>%</span>
+        </span>
       </div>
 
       <div

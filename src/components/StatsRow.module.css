@@ -1,22 +1,20 @@
 .row {
-  display:          grid;
+  display:               grid;
   grid-template-columns: repeat(4, 1fr);
-  gap:              1px;
-  border:           0.5px solid var(--border);
-  border-radius:    12px;
-  overflow:         hidden;
-  background:       var(--border);
+  gap:                   1px;
+  border:                0.5px solid var(--border);
+  border-radius:         12px;
+  overflow:              hidden;
+  background:            var(--border);
 }
 
 .stat {
-  background:       var(--bg-card);
-  padding:          1.25rem 1.5rem;
-  display:          flex;
-  flex-direction:   column;
-  gap:              4px;
-  opacity:          0;
-  animation:        fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  transition:       background 0.2s;
+  background:     var(--bg-card);
+  padding:        1.25rem 1.5rem;
+  display:        flex;
+  flex-direction: column;
+  gap:            4px;
+  transition:     background 0.2s;
 }
 
 .stat:hover { background: var(--bg-card-hover); }

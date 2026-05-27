@@ -47,7 +47,6 @@ export default function Home() {
               key={key}
               data={progress[key]}
               index={i}
-              animateOnMount
             />
           ))}
         </section>
